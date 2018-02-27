@@ -20,8 +20,8 @@ spec:
         env:
         - name: CLUSTER_NAME
           value: myesdb
-        - name: SERVER_BASEPATH
-          value: /api/v1/proxy/namespaces/default/services/kibana
+          #j- name: SERVER_BASEPATH
+          #jvalue: /api/v1/proxy/namespaces/default/services/kibana
         resources:
           limits:
             cpu: 1000m

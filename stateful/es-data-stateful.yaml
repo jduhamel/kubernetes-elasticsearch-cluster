@@ -7,13 +7,15 @@ metadata:
     role: data
 spec:
   serviceName: elasticsearch-data
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
         component: elasticsearch
         role: data
     spec:
+      nodeSelector:
+        env: db
       initContainers:
       - name: init-sysctl
         image: busybox:1.27.2
@@ -44,7 +46,7 @@ spec:
         - name: HTTP_ENABLE
           value: "false"
         - name: ES_JAVA_OPTS
-          value: -Xms256m -Xmx256m
+          value: -Xms512m -Xmx512m
         ports:
         - containerPort: 9300
           name: transport
@@ -60,8 +62,8 @@ spec:
   - metadata:
       name: storage
     spec:
-      storageClassName: standard
+      storageClassName: uhn
       accessModes: [ ReadWriteOnce ]
       resources:
         requests:
-          storage: 12Gi
+          storage: 120Gi
