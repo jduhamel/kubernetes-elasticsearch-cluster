@@ -24,7 +24,7 @@ spec:
           privileged: true
       containers:
       - name: es-master
-        image: quay.io/pires/docker-elasticsearch-kubernetes:6.1.2
+        image: quay.io/pires/docker-elasticsearch-kubernetes:6.2.2_1
         env:
         - name: NAMESPACE
           valueFrom:
@@ -48,6 +48,13 @@ spec:
           value: "false"
         - name: ES_JAVA_OPTS
           value: -Xms512m -Xmx512m
+        - name: PROCESSORS
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.cpu
+        resources:
+          limits:
+            cpu: 1
         ports:
         - containerPort: 9300
           name: transport
